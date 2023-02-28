@@ -43,23 +43,30 @@ def CreateListView(hwnd_parent, control_id, x, y, width, height, processes, icon
                                     None
                                     )
 
+    child_ex_style = ListView_GetStyle(hwnd_listview)
+    child_ex_style |= WindowStyle.LVS_EX_FULLROWSELECT
+    ListView_SetStyle(hwnd_listview, WindowStyle.LVS_EX_FULLROWSELECT)
+
     hsmall = ImageList_Create(
         16, 16, 0x00000020 | 0x00020000, len(processes), 0)
     hlarge = ImageList_Create(
         32, 32, 0x00000020 | 0x00020000, len(processes), 0)
 
+    null_icon = LoadIconA(None, LPSTR(32512))
+
     for i in range(len(processes)):
         if ImageList_AddIcon(hsmall, icons[i][0]) == -1 or \
            ImageList_AddIcon(hlarge, icons[i][1]) == -1:
-            raise Exception("Error adding Icons.")
+            #raise Exception("Error adding Icons.")
+            ImageList_AddIcon(hsmall, null_icon)
 
     ListView_SetImageList(hwnd_listview, hsmall, 1)
     ListView_SetImageList(hwnd_listview, hlarge, 0)
 
     column_names = [(b"Process Name", 160),
-                    (b"PID", 50),
-                    (b"Parent PID", 70),
-                    (b"Threads", 60),
+                    (b"PID", 80),
+                    (b"Parent PID", 90),
+                    (b"Threads", 80),
                     (b"Absolute Path", 500)]
 
     lvcolumn = LVCOLUMNA()
@@ -382,25 +389,25 @@ if __name__ == "__main__":
     client_rect = RECT()
     GetClientRect(hwnd_main, ctypes.byref(client_rect))
 
-    inject_button_width = 80
-    inject_button_height = 23
+    inject_button_width = 100
+    inject_button_height = 25
     hwnd_inject_button = CreateButton(hwnd_main, INJECT_BUTTON,
                                       client_rect.right - 10 - inject_button_width,
                                       client_rect.bottom - 10 - inject_button_height,
-                                      inject_button_width, b"Inject")
+                                      inject_button_width, b"Inject", height=inject_button_height)
 
     search_button_width = 100
-    search_button_height = 23
+    search_button_height = 25
     hwnd_search_button = CreateButton(hwnd_main, SEARCH_BUTTON,
                                       client_rect.right - 10 - search_button_width,
                                       client_rect.top + 10,
-                                      search_button_width, b'Browse DLL...')
+                                      search_button_width, b'Browse DLL...', height=search_button_height)
 
     CreateEdit(hwnd_main, FILEPATH_EDIT,
                client_rect.left + 10,
                client_rect.top + 10,
                client_rect.right - 10 - search_button_width - 20,
-               23
+               25
                )
 
     hwnd_listview, processes = CreateListView(hwnd_main, PROCESS_LISTVIEW,
