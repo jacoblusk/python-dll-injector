@@ -19,6 +19,18 @@ class ListViewMessage(enum.IntEnum):
     SETITEMTEXTA = FIRST + 46
     SETITEMTEXTW = FIRST + 116
     SORTITEMS = FIRST + 48
+    LVM_SETEXTENDEDLISTVIEWSTYLE = FIRST + 54
+    LVM_GETEXTENDEDLISTVIEWSTYLE = FIRST + 55
+
+
+def ListView_GetStyle(hwnd):
+    return SendMessageA(hwnd, ListViewMessage.LVM_GETEXTENDEDLISTVIEWSTYLE, WPARAM(0),
+                        0)
+
+
+def ListView_SetStyle(hwnd, style):
+    return SendMessageA(hwnd, ListViewMessage.LVM_SETEXTENDEDLISTVIEWSTYLE, WPARAM(0),
+                        style)
 
 
 def ListView_InsertItemA(hwnd, pitem):
@@ -71,7 +83,7 @@ def ListView_SortItems(hwndLV, _pfnCompare, _lPrm):
 
 
 def ImageList_AddIcon(himl, hicon):
-    ImageList_ReplaceIcon(himl, -1, hicon)
+    return ImageList_ReplaceIcon(himl, -1, hicon)
 
 
 class LVITEMA(ctypes.Structure):
