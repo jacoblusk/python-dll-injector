@@ -6,7 +6,7 @@ Currently only supports the most basic style of DLL injection, using `LoadLibrar
 
 Depending on whether you run this with 64bit or 32bit Python will change which processes you may inject into.
 
-![Python DLL Injector](https://i.imgur.com/IUq7qi9.png)
+![Python DLL Injector](https://i.imgur.com/w2AZbll.png)
 
 # How to Run
 
