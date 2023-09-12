@@ -27,10 +27,10 @@ def HIWORD(l):
 
 class RECT(ctypes.Structure):
     _fields_ = [
-        ('left', LONG),
-        ('top', LONG),
-        ('right', LONG),
-        ('bottom', LONG),
+        ("left", LONG),
+        ("top", LONG),
+        ("right", LONG),
+        ("bottom", LONG),
     ]
 
 
@@ -39,11 +39,11 @@ LPRECT = ctypes.POINTER(RECT)
 
 class ICONINFO(ctypes.Structure):
     _fields_ = [
-        ('fIcon', BOOL),
-        ('xHotspot', DWORD),
-        ('yHotspot', DWORD),
-        ('hbmMask', HBITMAP),
-        ('hbmColor', HBITMAP),
+        ("fIcon", BOOL),
+        ("xHotspot", DWORD),
+        ("yHotspot", DWORD),
+        ("hbmMask", HBITMAP),
+        ("hbmColor", HBITMAP),
     ]
 
 
@@ -53,20 +53,20 @@ PICONINFO = ctypes.POINTER(ICONINFO)
 class LOGFONTA(ctypes.Structure):
     LF_FACESIZE = 32
     _fields_ = [
-        ('lfHeight', LONG),
-        ('lfWidth', LONG),
-        ('lfEscapement', LONG),
-        ('lfOrientation', LONG),
-        ('lfWeight', LONG),
-        ('lfItalic', BYTE),
-        ('lfUnderline', BYTE),
-        ('lfStrikeOut', BYTE),
-        ('lfCharSet', BYTE),
-        ('lfOutPrecision', BYTE),
-        ('lfClipPrecision', BYTE),
-        ('lfQuality', BYTE),
-        ('lfPitchAndFamily', BYTE),
-        ('lfFaceName', CHAR * LF_FACESIZE)
+        ("lfHeight", LONG),
+        ("lfWidth", LONG),
+        ("lfEscapement", LONG),
+        ("lfOrientation", LONG),
+        ("lfWeight", LONG),
+        ("lfItalic", BYTE),
+        ("lfUnderline", BYTE),
+        ("lfStrikeOut", BYTE),
+        ("lfCharSet", BYTE),
+        ("lfOutPrecision", BYTE),
+        ("lfClipPrecision", BYTE),
+        ("lfQuality", BYTE),
+        ("lfPitchAndFamily", BYTE),
+        ("lfFaceName", CHAR * LF_FACESIZE),
     ]
 
 
@@ -75,22 +75,22 @@ LPLOGFONTA = ctypes.POINTER(LOGFONTA)
 
 class NONCLIENTMETRICSA(ctypes.Structure):
     _fields_ = [
-        ('cbSize', UINT),
-        ('iBorderWidth', ctypes.c_int),
-        ('iScrollWidth', ctypes.c_int),
-        ('iScrollHeight', ctypes.c_int),
-        ('iCaptionWidth', ctypes.c_int),
-        ('iCaptionHeight', ctypes.c_int),
-        ('lfCaptionFont', LOGFONTA),
-        ('iSmCaptionWidth', ctypes.c_int),
-        ('iSmCaptionHeight', ctypes.c_int),
-        ('lfSmCaptionFont', LOGFONTA),
-        ('iMenuWidth', ctypes.c_int),
-        ('iMenuHeight', ctypes.c_int),
-        ('lfMenuFont', LOGFONTA),
-        ('lfStatusFont', LOGFONTA),
-        ('lfMessageFont', LOGFONTA),
-        ('iPaddedBorderWidth', ctypes.c_int)
+        ("cbSize", UINT),
+        ("iBorderWidth", ctypes.c_int),
+        ("iScrollWidth", ctypes.c_int),
+        ("iScrollHeight", ctypes.c_int),
+        ("iCaptionWidth", ctypes.c_int),
+        ("iCaptionHeight", ctypes.c_int),
+        ("lfCaptionFont", LOGFONTA),
+        ("iSmCaptionWidth", ctypes.c_int),
+        ("iSmCaptionHeight", ctypes.c_int),
+        ("lfSmCaptionFont", LOGFONTA),
+        ("iMenuWidth", ctypes.c_int),
+        ("iMenuHeight", ctypes.c_int),
+        ("lfMenuFont", LOGFONTA),
+        ("lfStatusFont", LOGFONTA),
+        ("lfMessageFont", LOGFONTA),
+        ("iPaddedBorderWidth", ctypes.c_int),
     ]
 
 
@@ -98,21 +98,18 @@ LPNONCLIENTMETRICSA = ctypes.POINTER(NONCLIENTMETRICSA)
 
 
 class POINT(ctypes.Structure):
-    _fields_ = [
-        ('x', LONG),
-        ('y', LONG)
-    ]
+    _fields_ = [("x", LONG), ("y", LONG)]
 
 
 class MSG(ctypes.Structure):
     _fields_ = [
-        ('hwnd', HWND),
-        ('message', UINT),
-        ('wParam', WPARAM),
-        ('lParam', LPARAM),
-        ('time', DWORD),
-        ('pt', POINT),
-        ('lPrivate', DWORD)
+        ("hwnd", HWND),
+        ("message", UINT),
+        ("wParam", WPARAM),
+        ("lParam", LPARAM),
+        ("time", DWORD),
+        ("pt", POINT),
+        ("lPrivate", DWORD),
     ]
 
 
@@ -121,20 +118,35 @@ LPMSG = ctypes.POINTER(MSG)
 
 class WNDCLASSA(ctypes.Structure):
     _fields_ = [
-        ('style', UINT),
-        ('lpfnWndProc', WNDPROC),
-        ('cbClsExtra', ctypes.c_int),
-        ('cbWndExtra', ctypes.c_int),
-        ('hInstance', HINSTANCE),
-        ('hIcon', HICON),
-        ('hCursor', HCURSOR),
-        ('hbrBackground', HBRUSH),
-        ('lpszMenuName', LPCSTR),
-        ('lpszClassName', LPCSTR)
+        ("style", UINT),
+        ("lpfnWndProc", WNDPROC),
+        ("cbClsExtra", ctypes.c_int),
+        ("cbWndExtra", ctypes.c_int),
+        ("hInstance", HINSTANCE),
+        ("hIcon", HICON),
+        ("hCursor", HCURSOR),
+        ("hbrBackground", HBRUSH),
+        ("lpszMenuName", LPCSTR),
+        ("lpszClassName", LPCSTR),
     ]
 
 
 LPWNDCLASSA = ctypes.POINTER(WNDCLASSA)
+
+
+class ShowWindowCommand(enum.IntEnum):
+    HIDE = 0
+    SHOW = 5
+    SHOWDEFAULT = 10
+
+
+class SystemParametersInfoAcessibilityParameter(enum.IntFlag):
+    GETNONCLIENTMETRICS = 0x0029
+
+
+class LoadImageFlags(enum.IntFlag):
+    LOADFROMFILE = 0x00000010
+    VGACOLOR = 0x00000080
 
 
 class ClassStyle(enum.IntFlag):
@@ -177,8 +189,9 @@ class WindowStyle(enum.IntFlag):
     VISIBLE = 0x10000000
     VSCROLL = 0x00200000
     LVS_EX_FULLROWSELECT = 0x00000020
-    OVERLAPPEDWINDOW = OVERLAPPED | CAPTION | SYSMENU | THICKFRAME \
-        | MINIMIZEBOX | MAXIMIZEBOX
+    OVERLAPPEDWINDOW = (
+        OVERLAPPED | CAPTION | SYSMENU | THICKFRAME | MINIMIZEBOX | MAXIMIZEBOX
+    )
     TILEDWINDOW = OVERLAPPEDWINDOW
     POPUPWINDOW = POPUP | BORDER | SYSMENU
 
@@ -283,9 +296,20 @@ DefWindowProcA.argtypes = [HWND, UINT, WPARAM, LPARAM]
 DefWindowProcA.restype = LRESULT
 
 CreateWindowExA = ctypes.windll.user32.CreateWindowExA
-CreateWindowExA.argtypes = [DWORD, LPCSTR, LPCSTR, DWORD, ctypes.c_int,
-                            ctypes.c_int, ctypes.c_int, ctypes.c_int,
-                            HWND, HMENU, HINSTANCE, LPVOID]
+CreateWindowExA.argtypes = [
+    DWORD,
+    LPCSTR,
+    LPCSTR,
+    DWORD,
+    ctypes.c_int,
+    ctypes.c_int,
+    ctypes.c_int,
+    ctypes.c_int,
+    HWND,
+    HMENU,
+    HINSTANCE,
+    LPVOID,
+]
 CreateWindowExA.restype = HWND
 CreateWindowExA.errcheck = LPVOID_errcheck
 
