@@ -1,7 +1,7 @@
 from ctypes.wintypes import *
-from wintypes_extended import *
-from winapi_error import *
-from user32 import *
+from pydllinjector.wintypes_extended import *
+from pydllinjector.winapi_error import *
+from pydllinjector.user32 import *
 
 import ctypes
 

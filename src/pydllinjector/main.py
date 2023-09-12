@@ -1,10 +1,10 @@
 from ctypes.wintypes import *
-from wintypes_extended import *
-from kernel32 import *
-from user32 import *
-from comdlg32 import *
-from gdi32 import *
-from comctl32 import *
+from pydllinjector.wintypes_extended import *
+from pydllinjector.kernel32 import *
+from pydllinjector.user32 import *
+from pydllinjector.comdlg32 import *
+from pydllinjector.gdi32 import *
+from pydllinjector.comctl32 import *
 
 import ctypes
 
@@ -417,7 +417,7 @@ def WindowProc(hwnd, uMsg, wParam, lParam):
     return DefWindowProcA(hwnd, uMsg, wParam, lParam)
 
 
-if __name__ == "__main__":
+def main():
     processes, icons, paths = GetProcessEntries()
     print("Processes found:", len(processes))
 
@@ -538,3 +538,7 @@ if __name__ == "__main__":
             break
         TranslateMessage(ctypes.byref(msg))
         DispatchMessageA(ctypes.byref(msg))
+
+
+if __name__ == "__main__":
+    main()

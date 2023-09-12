@@ -1,0 +1,25 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "pydllinjector"
+version = "0.0.1"
+description = "A simple Python DLL injector that utilizes ctypes and the Win32 API."
+authors = [
+    {name = "Jacob Lusk", email = "jacobplusk@gmail.com"},
+]
+
+readme = "README.md"
+keywords = ["python", "win32", "dll"]
+license = {file = "LICENSE"}
+
+requires-python = ">=3.8"
+
+[project.scripts]
+pydllinjector = "pydllinjector.main:main"
+
+[project.urls]
+Home = "https://github.com/jacoblusk/python-dll-injector"
+
+

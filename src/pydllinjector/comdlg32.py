@@ -1,6 +1,6 @@
 from ctypes.wintypes import *
-from wintypes_extended import *
-from winapi_error import *
+from pydllinjector.wintypes_extended import *
+from pydllinjector.winapi_error import *
 
 import ctypes
 import enum

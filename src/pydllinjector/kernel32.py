@@ -1,6 +1,6 @@
 from ctypes.wintypes import *
-from wintypes_extended import *
-from winapi_error import *
+from pydllinjector.wintypes_extended import *
+from pydllinjector.winapi_error import *
 
 import ctypes
 import enum
@@ -11,9 +11,9 @@ INFINITE = ctypes.c_uint(-1)
 
 class SECURITY_ATTRIBUTES(ctypes.Structure):
     _fields_ = [
-        ('nLength', DWORD),
-        ('lpSecurityDescriptor', LPVOID),
-        ('bInheritHandle', BOOL)
+        ("nLength", DWORD),
+        ("lpSecurityDescriptor", LPVOID),
+        ("bInheritHandle", BOOL),
     ]
 
 
@@ -22,16 +22,16 @@ LPSECURITY_ATTRIBUTES = ctypes.POINTER(SECURITY_ATTRIBUTES)
 
 class PROCESSENTRY32(ctypes.Structure):
     _fields_ = [
-        ('dwSize', DWORD),
-        ('cntUsage', DWORD),
-        ('th32ProcessID', DWORD),
-        ('th32DefaultHeapID', ctypes.POINTER(ctypes.c_ulong)),
-        ('th32ModuleID', DWORD),
-        ('cntThreads', DWORD),
-        ('th32ParentProcessID', DWORD),
-        ('pcPriClassBase', LONG),
-        ('dwFlags', DWORD),
-        ('szExeFile', CHAR * MAX_PATH)
+        ("dwSize", DWORD),
+        ("cntUsage", DWORD),
+        ("th32ProcessID", DWORD),
+        ("th32DefaultHeapID", ctypes.POINTER(ctypes.c_ulong)),
+        ("th32ModuleID", DWORD),
+        ("cntThreads", DWORD),
+        ("th32ParentProcessID", DWORD),
+        ("pcPriClassBase", LONG),
+        ("dwFlags", DWORD),
+        ("szExeFile", CHAR * MAX_PATH),
     ]
 
 
@@ -124,8 +124,7 @@ VirtualFreeEx.restype = BOOL
 VirtualFreeEx.errcheck = Win32API_errcheck
 
 WriteProcessMemory = ctypes.windll.kernel32.WriteProcessMemory
-WriteProcessMemory.argtypes = [HANDLE, LPVOID,
-                               LPCVOID, SIZE_T, ctypes.POINTER(SIZE_T)]
+WriteProcessMemory.argtypes = [HANDLE, LPVOID, LPCVOID, SIZE_T, ctypes.POINTER(SIZE_T)]
 WriteProcessMemory.restype = BOOL
 WriteProcessMemory.errcheck = Win32API_errcheck
 
@@ -162,8 +161,15 @@ CloseHandle.restype = BOOL
 CloseHandle.errcheck = Win32API_errcheck
 
 CreateRemoteThread = ctypes.windll.kernel32.CreateRemoteThread
-CreateRemoteThread.argtypes = [HANDLE, LPSECURITY_ATTRIBUTES, SIZE_T,
-                               LPTHREAD_START_ROUTINE, LPVOID, DWORD, LPDWORD]
+CreateRemoteThread.argtypes = [
+    HANDLE,
+    LPSECURITY_ATTRIBUTES,
+    SIZE_T,
+    LPTHREAD_START_ROUTINE,
+    LPVOID,
+    DWORD,
+    LPDWORD,
+]
 CreateRemoteThread.restype = HANDLE
 CreateRemoteThread.errcheck = LPVOID_errcheck
 
@@ -177,8 +183,7 @@ GetExitCodeThread.restype = BOOL
 GetExitCodeThread.errcheck = Win32API_errcheck
 
 IsWow64Process2 = ctypes.windll.kernel32.IsWow64Process2
-IsWow64Process2.argtypes = [
-    HANDLE, ctypes.POINTER(USHORT), ctypes.POINTER(USHORT)]
+IsWow64Process2.argtypes = [HANDLE, ctypes.POINTER(USHORT), ctypes.POINTER(USHORT)]
 IsWow64Process2.restype = BOOL
 IsWow64Process2.errcheck = Win32API_errcheck
 
