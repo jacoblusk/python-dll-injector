@@ -7,7 +7,18 @@ Currently only supports the most basic style of DLL injection, using `LoadLibrar
 Depending on whether you run this with 64bit or 32bit Python will change which processes you may inject into.
 
 ![Python DLL Injector](https://i.imgur.com/w2AZbll.png)
-
-# How to Run
-
-Just clone the repository and run with `python main.py` as there are no other dependencies.
+# Installation
+You can install directly from GitHub using the command below,
+```sh
+pip install git+https://github.com/jacoblusk/python-dll-injector.git
+```
+Or you can clone the repo and install from the repository itself.
+```sh
+git clone https://github.com/jacoblusk/python-dll-injector.git
+cd python-dll-injector
+pip install .
+```
+To run the program,
+```sh
+pydllinjector
+```
